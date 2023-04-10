@@ -19,11 +19,13 @@ RUN groupadd -r foreman-proxy -f -g 0 && \
 # Temp container that download gems/npms and compile assets etc
 FROM base as builder
 
+ENV BUNDLER_SKIPPED_GROUPS="development"
+
 RUN \
   dnf install -y redhat-rpm-config git \
     gcc-c++ make bzip2 gettext tar \
     libxml2-devel libcurl-devel ruby-devel \ 
-    libvirt-devel systemd-devel krb5-devel libyaml-devel && \
+    libvirt-devel systemd-devel krb5-devel && \
   dnf clean all
 
 ARG HOME=/home/foreman-proxy
@@ -31,7 +33,8 @@ USER 1001
 WORKDIR $HOME
 COPY --chown=1001:0 . ${HOME}/
 
-RUN bundle install --binstubs --clean --path vendor --jobs=5 --retry=3 && \
+RUN bundle install --without "${BUNDLER_SKIPPED_GROUPS}" \
+    --binstubs --clean --path vendor --jobs=5 --retry=3 && \
   rm -rf vendor/ruby/*/cache/*.gem && \
   find vendor/ruby/*/gems -name "*.c" -delete && \
   find vendor/ruby/*/gems -name "*.o" -delete
