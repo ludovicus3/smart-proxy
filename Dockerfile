@@ -35,7 +35,7 @@ COPY --chown=1001:0 . ${HOME}/
 
 RUN bundle config set --local without "${BUNDLER_SKIPPED_GROUPS}" && \
   bundle config set --local clean true && \
-  bundle config set --local path vendor && \
+#  bundle config set --local path vendor && \
   bundle config set --local jobs 5 && \
   bundle config set --local retry 3
 RUN bundle install && \
