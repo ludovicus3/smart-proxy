@@ -44,7 +44,7 @@ RUN bundle install && \
   find vendor/ruby/*/gems -name "*.c" -delete && \
   find vendor/ruby/*/gems -name "*.o" -delete
 RUN \
-  make -C locale all-mo && \
+  make -C locale all-mo \
 
 USER 0
 RUN chgrp -R 0 ${HOME} && \
@@ -63,6 +63,10 @@ COPY --from=builder /usr/bin/entrypoint.sh /usr/bin/entrypoint.sh
 COPY --from=builder --chown=1001:0 ${HOME}/.bundle/config ${HOME}/.bundle/config
 COPY --from=builder --chown=1001:0 ${HOME}/Gemfile.lock ${HOME}/Gemfile.lock
 COPY --from=builder --chown=1001:0 ${HOME}/vendor/ruby ${HOME}/vendor/ruby
+
+RUN \
+  mkdir -p /etc/foreman-proxy/settings.d && \
+  ln -s /etc/foreman-proxy/settings.yml ${HOME}/config/settings.yml
 
 RUN date -u > BUILD_TIME
 
