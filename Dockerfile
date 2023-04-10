@@ -70,7 +70,7 @@ RUN ln -s /etc/foreman-proxy/settings.yml ${HOME}/config/settings.yml
 RUN date -u > BUILD_TIME
 
 # Start the main process.
-CMD bundle exec bin/smart-proxy
+CMD ${HOME}/bin/smart-proxy
 
 EXPOSE 8080/tcp
 EXPOSE 8443/tcp
