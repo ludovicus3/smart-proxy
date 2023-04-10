@@ -23,7 +23,7 @@ RUN \
   dnf install -y redhat-rpm-config git \
     gcc-c++ make bzip2 gettext tar \
     libxml2-devel libcurl-devel ruby-devel \ 
-    libvirt-devel systemd-devel && \
+    libvirt-devel systemd-devel krb5-devel libyaml-devel && \
   dnf clean all
 
 ARG HOME=/home/foreman-proxy
