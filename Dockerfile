@@ -5,7 +5,7 @@ ARG RUBY_VERSION="2.7"
 RUN \
   dnf upgrade -y && \
   dnf module enable ruby:${RUBY_VERSION} -y && \
-  dnf install ruby{,gems} rubygem-{rake,bundler} && \
+  dnf install ruby{,gems} rubygem-{rake,bundler} -y && \
   dnf clean all
 
 ARG HOME=/home/foreman-proxy
