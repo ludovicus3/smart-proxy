@@ -57,7 +57,6 @@ ARG HOME=/home/foreman-proxy
 USER 1001
 WORKDIR ${HOME}
 COPY --chown=1001:0 . ${HOME}/
-COPY --from=builder /usr/bin/entrypoint.sh /usr/bin/entrypoint.sh
 COPY --from=builder --chown=1001:0 ${HOME}/.bundle/config ${HOME}/.bundle/config
 COPY --from=builder --chown=1001:0 ${HOME}/Gemfile.lock ${HOME}/Gemfile.lock
 COPY --from=builder --chown=1001:0 ${HOME}/vendor/ruby ${HOME}/vendor/ruby
