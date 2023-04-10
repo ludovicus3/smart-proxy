@@ -35,7 +35,7 @@ COPY --chown=1001:0 . ${HOME}/
 
 RUN bundle config set --local without "${BUNDLER_SKIPPED_GROUPS}" && \
   bundle config set --local clean true && \
-#  bundle config set --local path vendor && \
+  bundle config set --local path vendor && \
   bundle config set --local jobs 5 && \
   bundle config set --local retry 3
 RUN bundle install && \
@@ -65,7 +65,6 @@ COPY --from=builder --chown=1001:0 ${HOME}/.bundle/config ${HOME}/.bundle/config
 COPY --from=builder --chown=1001:0 ${HOME}/Gemfile.lock ${HOME}/Gemfile.lock
 COPY --from=builder --chown=1001:0 ${HOME}/vendor/ruby ${HOME}/vendor/ruby
 RUN ln -s /etc/foreman-proxy/settings.yml ${HOME}/config/settings.yml
-
 
 RUN date -u > BUILD_TIME
 
