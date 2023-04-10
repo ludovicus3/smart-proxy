@@ -4,6 +4,7 @@ ARG RUBY_VERSION="2.7"
 
 RUN \
   dnf upgrade -y && \
+  dnf install epel-release -y && \
   dnf module enable ruby:${RUBY_VERSION} -y && \
   dnf install ruby{,gems} rubygem-{rake,bundler,rack} -y && \
   dnf clean all
