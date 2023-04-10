@@ -19,13 +19,13 @@ RUN groupadd -r foreman-proxy -f -g 0 && \
 # Temp container that download gems/npms and compile assets etc
 FROM base as builder
 
-ENV BUNDLER_SKIPPED_GROUPS="test development"
+ENV BUNDLER_SKIPPED_GROUPS="test development journald"
 
 RUN \
   dnf install -y redhat-rpm-config git \
     gcc-c++ make bzip2 gettext tar \
     libxml2-devel libcurl-devel ruby-devel \ 
-    libvirt-devel systemd-devel krb5-devel && \
+    libvirt-devel krb5-devel && \
   dnf clean all
 
 ARG HOME=/home/foreman-proxy
