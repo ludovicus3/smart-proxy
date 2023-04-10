@@ -19,7 +19,7 @@ RUN groupadd -r foreman-proxy -f -g 0 && \
 # Temp container that download gems/npms and compile assets etc
 FROM base as builder
 
-ENV BUNDLER_SKIPPED_GROUPS="development"
+ENV BUNDLER_SKIPPED_GROUPS="test development"
 
 RUN \
   dnf install -y redhat-rpm-config git \
