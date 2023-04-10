@@ -43,8 +43,6 @@ RUN bundle install && \
   rm -rf vendor/ruby/*/cache/*.gem && \
   find vendor/ruby/*/gems -name "*.c" -delete && \
   find vendor/ruby/*/gems -name "*.o" -delete
-RUN \
-  make -C locale all-mo 
 
 USER 0
 RUN chgrp -R 0 ${HOME} && \
