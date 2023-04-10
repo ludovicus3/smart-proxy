@@ -1,12 +1,11 @@
 # Base container that is used for both building and running the app
 FROM quay.io/centos/centos:stream8 as base
 ARG RUBY_VERSION="2.7"
-ARG NODEJS_VERSION="12"
 
 RUN \
   dnf upgrade -y && \
   dnf module enable ruby:${RUBY_VERSION} -y && \
-  dnf install ruby{,gems} rubygem-{rake,bundler} \
+  dnf install ruby{,gems} rubygem-{rake,bundler} && \
   dnf clean all
 
 ARG HOME=/home/foreman-proxy
